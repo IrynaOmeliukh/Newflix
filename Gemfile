@@ -65,3 +65,6 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+gem 'themoviedb-api', git: 'https://github.com/developius/themoviedb-api'
+gem 'pry'

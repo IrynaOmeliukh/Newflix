@@ -1,13 +1,46 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[ show edit update destroy ]
-
   # GET /movies
   def index
-    @movies = Movie.all
+    @movies_tmbd = Tmdb::Movie.popular
+    @movies_array = @movies_tmbd.results
+    @movies_array.each do |tmdb|
+      if !Movie.exists?(name: tmdb.title)
+        movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids,
+          description: tmdb.overview, poster_path: tmdb.poster_path,
+          vote_avg: tmdb.vote_average, vote_count: tmdb.vote_count, popularity:
+          tmdb.popularity, release_date: tmdb.release_date
+        )
+       end
+    end
+    @movies = collection
+  end
+
+  def search
+    if params[:search].blank?
+      redirect_to movies_url and return
+    else
+      @parameter = params[:search].downcase
+      @movie_data = Tmdb::Search.movie(@parameter, page: 1, language: 'en')
+      movie_array = @movie_data.results
+
+      @search_movies = []
+      movie_array.each do |tmdb|
+      #  if !Movie.exists?(title: tmdb.title)
+      movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids,
+        description: tmdb.overview, poster_path: tmdb.poster_path,
+        vote_avg: tmdb.vote_average, vote_count: tmdb.vote_count, popularity:
+        tmdb.popularity, release_date: tmdb.release_date
+      )
+      @search_movies << movie
+      #  end
+      end
+
+    end
   end
 
   # GET /movies/1
   def show
+    @movie = resource
   end
 
   # GET /movies/new
@@ -17,6 +50,7 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
+    @movie = resource
   end
 
   # POST /movies
@@ -46,9 +80,12 @@ class MoviesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_movie
-      @movie = Movie.find(params[:id])
+    def collection
+      Movie.all
+    end
+
+    def resource
+      collection.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
