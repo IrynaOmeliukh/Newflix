@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
     @movies_array = @movies_tmbd.results
     @movies_array.each do |tmdb|
       if !Movie.exists?(name: tmdb.title)
-        movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids,
+        movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids, tmdb_id: tmdb.id,
           description: tmdb.overview, poster_path: tmdb.poster_path,
           vote_avg: tmdb.vote_average, vote_count: tmdb.vote_count, popularity:
           tmdb.popularity, release_date: tmdb.release_date
@@ -26,7 +26,7 @@ class MoviesController < ApplicationController
       @search_movies = []
       movie_array.each do |tmdb|
       #  if !Movie.exists?(title: tmdb.title)
-      movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids,
+      movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids, tmdb_id: tmdb.id,
         description: tmdb.overview, poster_path: tmdb.poster_path,
         vote_avg: tmdb.vote_average, vote_count: tmdb.vote_count, popularity:
         tmdb.popularity, release_date: tmdb.release_date
@@ -66,6 +66,8 @@ class MoviesController < ApplicationController
 
   # PATCH/PUT /movies/1
   def update
+    @movie = resource
+
     if @movie.update(movie_params)
       redirect_to @movie, notice: "Movie was successfully updated."
     else
