@@ -1,28 +1,31 @@
 <!-- component -->
-<div class="h-full max-h-full bg-gray-100 py-6 sm:py-12">
+<% movie_form = MovieForm.new(movie) %>
+
+<div class="bg-gray-100 pb-40">
   <div class="py-3 sm:max-w-xl sm:mx-auto">
     <div class="bg-white shadow-lg border-gray-100 max-h-100 border sm:rounded-3xl p-8 flex space-x-10">
       <div class="h-52 overflow-visible w-1/2">
-          <%= image_tag "https://image.tmdb.org/t/p/original/#{movie.poster_path}", class: "rounded-3xl shadow-lg" %>
+
+        <%= puts '=' * 100
+    puts movie
+    puts '=' * 100 %>
+
+          <%= image_tag "https://image.tmdb.org/t/p/original/#{movie['poster_path']}", class: "rounded-3xl shadow-lg" %>
       </div>
       <div class="flex flex-col w-1/2 space-y-4">
         <div class="flex justify-between items-start">
-          <h2 class="text-3xl font-bold"><%= movie.name %></h2>
-          <div class="bg-yellow-400 font-bold rounded-xl p-2"><%= movie.vote_avg.round(2) %></div>
+          <h2 class="text-3xl font-bold"><%= movie['title'] || movie['name'] %></h2>
+          <div class="bg-yellow-400 font-bold rounded-xl p-2"><%= movie_form.rating %></div>
         </div>
         <div>
           <div class="text-sm text-gray-400">Movie</div>
-          <div class="text-lg text-gray-800"><%= movie.release_date %></div>
+          <div class="text-lg text-gray-800"><%= movie['release_date'] %></div>
         </div>
           <p class=" text-gray-400 max-h-40 overflow-y-hidden">
-            <% movie_data = Tmdb::Movie.detail(movie.tmdb_id) %>
-            <% genres_array = movie_data.genres %>
-            <%  genres_array.each do |g| %>
-              <%= g.name %>
-            <% end %>
+            <%= movie_form.genres %>
           </p>
         <%# <div class="flex text-2xl font-bold text-a"></div> %>
-        <%= link_to 'Details', movie_path(movie), class: 'flex text-2xl font-bold text-a' %>
+        <%= link_to 'Details', movie_path(id: movie), class: 'flex text-2xl font-bold text-a' %>
 
       </div>
 

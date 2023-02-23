@@ -1,18 +1,19 @@
 class MoviesController < ApplicationController
   # GET /movies
   def index
-    @movies_tmbd = Tmdb::Movie.popular
-    @movies_array = @movies_tmbd.results
-    @movies_array.each do |tmdb|
-      if !Movie.exists?(name: tmdb.title)
-        movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids, tmdb_id: tmdb.id,
-          description: tmdb.overview, poster_path: tmdb.poster_path,
-          vote_avg: tmdb.vote_average, vote_count: tmdb.vote_count, popularity:
-          tmdb.popularity, release_date: tmdb.release_date
-        )
-       end
-    end
-    @movies = collection
+    @tmbd_movies = Tmdb::Movie.popular
+    @movies_results = @tmbd_movies.results
+    @movie_decorator = MoviesDecorator.new(@movies_results, collection)
+    # @movies_results.each do |tmdb|
+    #   if !Movie.exists?(name: tmdb.title)
+    #     movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids, tmdb_id: tmdb.id,
+    #       description: tmdb.overview, poster_path: tmdb.poster_path,
+    #       vote_avg: tmdb.vote_average, vote_count: tmdb.vote_count, popularity:
+    #       tmdb.popularity, release_date: tmdb.release_date
+    #     )
+    #    end
+    # end
+    # @movies = collection
   end
 
   def search
