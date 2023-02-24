@@ -9,10 +9,11 @@ class DbMoviesSerializer
 
   def to_hash
     @movies_hash = movies.as_json.map do |movie|
-      # binding.pry
-      movie.slice(*EXTRACTED_KEYS)
-      # movie['details'] = movie.except(*EXTRACTED_KEYS)
+      new_movie = movie.slice(*EXTRACTED_KEYS)
+      new_movie['details'] = movie.except(*EXTRACTED_KEYS)
+      new_movie
     end
+    # binding.pry
 
     @movies_hash
   end

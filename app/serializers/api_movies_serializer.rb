@@ -10,7 +10,9 @@ class ApiMoviesSerializer
 
   def to_hash
     @movies_hash = movies.as_json.map do |movie|
-      movie.values.first.slice(*EXTRACTED_KEYS)
+      new_movie = movie.values.first.slice(*EXTRACTED_KEYS)
+      new_movie['details'] = movie.values.first.except(*EXTRACTED_KEYS)
+      new_movie
     end
     # binding.pry
 
