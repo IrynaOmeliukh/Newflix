@@ -21,20 +21,22 @@ class MoviesController < ApplicationController
       redirect_to movies_url and return
     else
       @parameter = params[:search].downcase
-      @movie_data = Tmdb::Search.movie(@parameter, page: 1, language: 'en')
-      movie_array = @movie_data.results
+      @search_movies = MovieSearch.search(@parameter)
 
-      @search_movies = []
-      movie_array.each do |tmdb|
-      #  if !Movie.exists?(title: tmdb.title)
-      movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids, tmdb_id: tmdb.id,
-        description: tmdb.overview, poster_path: tmdb.poster_path,
-        vote_avg: tmdb.vote_average, vote_count: tmdb.vote_count, popularity:
-        tmdb.popularity, release_date: tmdb.release_date
-      )
-      @search_movies << movie
+      # @movie_data = Tmdb::Search.movie(@parameter, page: 1, language: 'en')
+      # movie_array = @movie_data.results
+
+      # @search_movies = []
+      # movie_array.each do |tmdb|
+      #   #  if !Movie.exists?(title: tmdb.title)
+      #   movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids, tmdb_id: tmdb.id,
+      #     description: tmdb.overview, poster_path: tmdb.poster_path,
+      #     vote_avg: tmdb.vote_average, vote_count: tmdb.vote_count, popularity:
+      #     tmdb.popularity, release_date: tmdb.release_date
+      #   )
+      #   @search_movies << movie
       #  end
-      end
+      # end
 
     end
   end

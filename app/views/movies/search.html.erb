@@ -8,6 +8,9 @@
   </div>
 
   <div id="search_movies" class="flex flex-wrap justify-between">
-    <%= render @search_movies %>
+    <%# <%= render 'movies/movie', movies@search_movies %>
+    <% @search_movies.each do |movie| %>
+      <%= render 'movies/movie', movie: movie %>
+    <% end %>
   </div>
 </div>
