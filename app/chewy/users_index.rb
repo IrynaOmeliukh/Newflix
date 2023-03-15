@@ -1,4 +1,6 @@
 class UsersIndex < Chewy::Index
+  index_scope User
+
   settings analysis: {
     analyzer: {
       email: {
@@ -8,7 +10,6 @@ class UsersIndex < Chewy::Index
     }
   }
 
-  index_scope User
   field :nickname
   field :email, analyzer: 'email'
 end

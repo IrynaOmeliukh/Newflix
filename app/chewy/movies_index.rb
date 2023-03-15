@@ -1,4 +1,6 @@
 class MoviesIndex < Chewy::Index
+  index_scope Movie
+
   settings analysis: {
     analyzer: {
       email: {
@@ -8,7 +10,6 @@ class MoviesIndex < Chewy::Index
     }
   }
 
-  index_scope Movie
   field :title
   field :description
 end
