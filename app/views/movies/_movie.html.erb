@@ -20,7 +20,7 @@
             <%= movie_form.genres %>
           </p>
         <%# <div class="flex text-2xl font-bold text-a"></div> %>
-        <%= link_to 'Details', movie_path(id: movie), class: 'flex text-2xl font-bold text-a' %>
+        <%= link_to 'Details', movie_title_path(title: movie['title'].parameterize), class: 'flex text-2xl font-bold text-a' %>
 
       </div>
 

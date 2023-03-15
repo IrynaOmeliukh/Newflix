@@ -18,4 +18,12 @@ class ApiMoviesSerializer
 
     @movies_hash
   end
+
+  def self.movie_to_hash(movie)
+    new_movie = movie.first.as_json.values.first.slice(*EXTRACTED_KEYS)
+    new_movie['details'] = movie.first.as_json.values.first.except(*EXTRACTED_KEYS)
+    new_movie
+  end
+
+
 end

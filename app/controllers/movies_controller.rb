@@ -43,7 +43,10 @@ class MoviesController < ApplicationController
 
   # GET /movies/1
   def show
-    @movie = resource
+    title = params[:title].gsub('-', ' ') # replace dashes with spaces
+    tmbd_movie = Tmdb::Search.movie(title).results
+    serialized_movie = ApiMoviesSerializer.movie_to_hash(tmbd_movie)
+    @movie = Movie.find_by(title: title) || serialized_movie
   end
 
   # GET /movies/new
@@ -95,6 +98,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.require(:movie).permit(:title, :description, :poster_path, :genres, :release_date, :popularity, :vote_avg, :vote_count)
+      params.require(:movie).permit(:title, :description, :poster_path, :genres, :release_date, :popularity, :vote_average, :vote_count)
     end
 end
