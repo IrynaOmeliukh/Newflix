@@ -4,23 +4,23 @@ RSpec.describe "movies/index", type: :view do
   before(:each) do
     assign(:movies, [
       Movie.create!(
-        name: "Name",
+        title: "Name",
         description: "MyText",
         poster_path: "Poster Path",
         genres: 2,
         release_date: "Release Date",
         popularity: 3.5,
-        vote_avg: 4.5,
+        vote_average: 4.5,
         vote_count: 5
       ),
       Movie.create!(
-        name: "Name",
+        title: "Name",
         description: "MyText",
         poster_path: "Poster Path",
         genres: 2,
         release_date: "Release Date",
         popularity: 3.5,
-        vote_avg: 4.5,
+        vote_average: 4.5,
         vote_count: 5
       )
     ])

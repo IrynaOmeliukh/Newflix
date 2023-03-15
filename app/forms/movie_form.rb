@@ -7,10 +7,17 @@ class MovieForm
 
   def genres
     # binding.pry
-    if movie['genres'].present?
-      return 'no genres'
+    # if movie['genres'].present?
+    #   return 'no genres'
+    # end
+    # tmbd_movie_details.genres.map(&:name).join(", ")
+
+    if movie['genres'].nil?
+      return tmbd_movie_details.genres.map(&:name).join(", ")
     end
-    tmbd_movie_details.genres.map(&:name).join(", ")
+    'no genres'
+
+    # end
   end
 
   def rating

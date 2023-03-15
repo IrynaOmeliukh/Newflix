@@ -37,8 +37,8 @@ class MoviesController < ApplicationController
       #   @search_movies << movie
       #  end
       # end
-
     end
+    @search_movies
   end
 
   # GET /movies/1
@@ -95,6 +95,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.require(:movie).permit(:name, :description, :poster_path, :genres, :release_date, :popularity, :vote_avg, :vote_count)
+      params.require(:movie).permit(:title, :description, :poster_path, :genres, :release_date, :popularity, :vote_avg, :vote_count)
     end
 end

@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe "movies/show", type: :view do
   before(:each) do
     assign(:movie, Movie.create!(
-      name: "Name",
+      title: "Name",
       description: "MyText",
       poster_path: "Poster Path",
       genres: 2,
       release_date: "Release Date",
       popularity: 3.5,
-      vote_avg: 4.5,
+      vote_average: 4.5,
       vote_count: 5
     ))
   end

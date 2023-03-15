@@ -1,7 +1,7 @@
 class DbMoviesSerializer
   attr_reader :movies
 
-  EXTRACTED_KEYS = ['id', 'name', 'description', 'poster_path', 'genres']
+  EXTRACTED_KEYS = ['id', 'title', 'description', 'poster_path', 'genres']
 
   def initialize(movies)
     @movies = movies

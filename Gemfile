@@ -69,3 +69,5 @@ end
 gem 'themoviedb-api', git: 'https://github.com/developius/themoviedb-api'
 gem 'pry'
 gem 'devise', '~> 4.9'
+
+gem 'chewy'

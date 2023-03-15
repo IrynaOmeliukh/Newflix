@@ -10,22 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_091929) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_070217) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "movies", force: :cascade do |t|
-    t.string "name"
     t.text "description"
     t.string "poster_path"
     t.integer "genres", default: [], array: true
     t.string "release_date"
     t.float "popularity"
-    t.float "vote_avg"
+    t.float "vote_average"
     t.integer "vote_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tmdb_id"
+    t.string "title"
   end
 
   create_table "users", force: :cascade do |t|
