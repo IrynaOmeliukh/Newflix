@@ -6,7 +6,6 @@ class MovieForm
   end
 
   def genres
-    # binding.pry
     # if movie['genres'].present?
     #   return 'no genres'
     # end
@@ -16,12 +15,11 @@ class MovieForm
       return tmbd_movie_details.genres.map(&:name).join(", ")
     end
     'no genres'
+    # add checking if in the db genres are setted correctly
 
-    # end
   end
 
   def rating
-    # binding.pry
     if movie['vote_average'].nil?
       movie['vote_average'] = 0
     else
@@ -34,9 +32,4 @@ class MovieForm
   def tmbd_movie_details
     @tmbd_movie_details ||= Tmdb::Movie.detail(movie['id'])
   end
-
-  # def movie_details
-  #   @movie_details || =
-  # end
-
 end

@@ -7,17 +7,18 @@ class MovieSearch
 
   def self.db_search(parameter)
     MoviesIndex.import!
+
     search_result = MoviesIndex.query(
       { match: { title: parameter } }
     ).records
   end
 
   def self.search(parameter)
-    # binding.pry
     @movies_results = []
+
     @tmbd_movies_results = tmbd_search(parameter)
     @db_movies_results = db_search(parameter)
-    # binding.pry
+
     @movies_results.push(@tmbd_movies_results).push(@db_movies_results).flatten
   end
 end
