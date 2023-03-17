@@ -6,8 +6,6 @@ class MovieSearch
   end
 
   def self.db_search(parameter)
-    MoviesIndex.import!
-
     search_result = MoviesIndex.query(
       { match: { title: parameter } }
     ).records

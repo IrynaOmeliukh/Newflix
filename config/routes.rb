@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  # get 'user/index'
+  # get 'user/show'
+  get 'user/search', to: 'users#search'
   devise_for :users
   resources :movies, except: [:show]
+  resources :users, only: [:index, :show]
 
   get '/movies/:title', to: 'movies#show', as: 'movie_title'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
