@@ -44,8 +44,11 @@ class MoviesController < ApplicationController
   # GET /movies/1
   def show
     title = params[:title].gsub('-', ' ') # replace dashes with spaces
+    id = params[:id]
     tmbd_movie = Tmdb::Search.movie(title).results
-    serialized_movie = ApiMoviesSerializer.movie_to_hash(tmbd_movie)
+    tmbd_movie1 = Movie.find_by(id: id) || Tmdb::Movie.detail(id)
+    # binding.pry
+    serialized_movie = ApiMoviesSerializer.movie_to_hash(tmbd_movie1)
     @movie = Movie.find_by(title: title) || serialized_movie
   end
 

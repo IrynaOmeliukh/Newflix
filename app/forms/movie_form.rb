@@ -27,9 +27,18 @@ class MovieForm
     end
   end
 
+  def casts
+    tmbd_cast = CastsSerializer.new(Tmdb::Movie.cast(movie['id'])).to_hash
+    # binding.pry
+  end
+
   private
 
   def tmbd_movie_details
     @tmbd_movie_details ||= Tmdb::Movie.detail(movie['id'])
   end
+
+  # def tmbd_cast
+  #   @tmbd_cast ||= Tmdb::Movie.cast(movie['id'])
+  # end
 end
