@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'favorite_movies/index'
   # get 'user/index'
   # get 'user/show'
   get 'user/search', to: 'users#search'

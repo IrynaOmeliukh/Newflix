@@ -28,8 +28,15 @@ class MovieForm
   end
 
   def casts
-    tmbd_cast = CastsSerializer.new(Tmdb::Movie.cast(movie['id'])).to_hash
-    # binding.pry
+    begin
+      if Tmdb::Movie.detail(movie['id']).title == movie['title']
+        @tmbd_cast = CastsSerializer.new(Tmdb::Movie.cast(movie['id'])).to_hash
+      else
+        @tmbd_cast = []
+      end
+    rescue Tmdb::Error => e
+      @tmbd_cast = []
+    end
   end
 
   private

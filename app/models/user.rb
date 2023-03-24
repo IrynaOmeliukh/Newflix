@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :favorites
+  has_many :favorite_movies, through: :favorites, source: :movie
+
+
   update_index('users') { self }
 
   before_save { self.email = email.downcase }
