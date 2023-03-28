@@ -1,7 +1,8 @@
 class CreateFavoriteMovies < ActiveRecord::Migration[7.0]
   def change
     create_table :favorite_movies do |t|
-
+      t.belongs_to :movie, index: true
+      t.belongs_to :user, index: true
       t.timestamps
     end
   end

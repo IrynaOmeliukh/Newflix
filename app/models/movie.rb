@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
   has_many :favorites
-  has_many :favorited_by, through: :favorites, source: :user
+  has_many :users, through: :favorite
 
   update_index('movies') { self }
 end

@@ -4,6 +4,8 @@
   <% end %>
   <div class="flex justify-between items-center pb-4">
     <h1 class="font-bold text-4xl">Movies</h1>
+    <%= link_to 'favorites', favorites_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"%>
+
     <%= link_to 'New movie', new_movie_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"%>
   </div>
 

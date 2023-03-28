@@ -43,9 +43,8 @@ class MoviesController < ApplicationController
 
   # GET /movies/1
   def show
-    # @favorite = current_user.favorites.find_by(movie_id: @movie.id)
 
-    title = params[:title].gsub('-', ' ') # replace dashes with spaces
+    # title = params[:title].gsub('-', ' ') # replace dashes with spaces
     id = params[:id]
     # tmbd_movie = Tmdb::Search.movie(title).results
 
@@ -56,7 +55,9 @@ class MoviesController < ApplicationController
       @movie = ApiMoviesSerializer.movie_to_hash(Tmdb::Movie.detail(id))
 
     end
-  @movie
+    # binding.pry
+    # @favorite = current_user.favorites.find_by(movie_id: @movie['id'])
+    @movie
 
     # tmbd_movie1 = Movie.find_by(id: id) || Tmdb::Movie.detail(id)
 

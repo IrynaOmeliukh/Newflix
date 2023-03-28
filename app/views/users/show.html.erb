@@ -2,3 +2,11 @@
   <h1 class="font-bold text-4xl">User#show</h1>
   <p>Find me in app/views/user/show.html.erb</p>
 </div>
+<h1><%= @user.nickname %></h1>
+<h2>Favorite Movies:</h2>
+<ul>
+<%= binding.pry %>
+  <% @favorite_movies.each do |movie| %>
+    <li><%= movie.title %></li>
+  <% end %>
+</ul>

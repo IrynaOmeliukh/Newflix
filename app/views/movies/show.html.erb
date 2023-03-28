@@ -54,3 +54,18 @@
 </div>
 
 <%= link_to 'Back to movies', movies_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors duration-300 ease-in-out" %>
+<%# <%= render 'favorites/index', movie: @movie %> %>
+<% db_movie = nil %>
+<% if current_user.movies.present? %>
+  <% current_user.movies.map do |movie|  %>
+    <% if movie.title == @movie['title']%>
+      <% db_movie = movie %>
+    <% end %>
+  <% end %>
+<%# <%= binding.pry %> %>
+  <% if current_user.movies.map(&:title).include?(@movie['title']) %>
+    <%= button_to 'Remove from Favorites', favorite_path(id: db_movie.id), method: :delete %>
+  <% else %>
+    <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post %>
+  <% end %>
+<% end %>

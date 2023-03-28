@@ -11,7 +11,7 @@ class MovieForm
     # end
     # tmbd_movie_details.genres.map(&:name).join(", ")
 
-    if movie['genres'].nil?
+    if movie['genres'].present? || movie['genres'].nil?
       return tmbd_movie_details.genres.map(&:name).join(", ")
     end
     'no genres'
@@ -23,7 +23,7 @@ class MovieForm
     if movie['vote_average'].nil?
       movie['vote_average'] = 0
     else
-      movie['vote_average'].round(2)
+      movie['vote_average'].round(1)
     end
   end
 
