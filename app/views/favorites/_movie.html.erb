@@ -1,0 +1,7 @@
+<% movie_form = MovieForm.new(movie) %>
+
+<tr class="border-b border-gray-200 hover:bg-gray-100">
+  <td class="py-3 px-6 text-left"><%= movie['title'] %></td>
+  <td class="py-3 px-6 text-left"><%= movie['overview']%></td>
+  <td class="py-3 px-6 text-left"><%= movie_form.genres %></td>
+</tr>

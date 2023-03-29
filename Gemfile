@@ -71,3 +71,7 @@ gem 'pry'
 gem 'devise', '~> 4.9'
 
 gem 'chewy'
+
+gem 'wicked_pdf'
+
+gem "wkhtmltopdf-binary"

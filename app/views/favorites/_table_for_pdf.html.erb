@@ -1,0 +1,16 @@
+<div class="bg-white shadow-md rounded-lg my-6">
+  <table class="w-full table-auto">
+    <thead>
+      <tr class="bg-pink-200 text-gray-700 uppercase text-sm leading-normal">
+        <th class="py-3 px-6 text-left">title</th>
+        <th class="py-3 px-6 text-left">description</th>
+        <th class="py-3 px-6 text-left">genres</th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-600 text-sm font-light">
+     <% favorites.each do |movie| %>
+        <%= render 'favorites/movie', movie: movie %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

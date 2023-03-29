@@ -1,11 +1,22 @@
 class FavoritesController < ApplicationController
   def index
-    @favorites = []
-    current_user.movies.map do |favorite_movie|
-      movie = Tmdb::Movie.detail(favorite_movie.tmdb_id)
-      @favorites << movie
-    end
-    @favorites_hash = ApiMoviesSerializer.new(@favorites).to_hash #.find_by(movie_id: @movie['id'])
+    @favorites = get_favorites
+  end
+
+  # def show
+  #   @favorites = get_favorites
+
+  # end
+
+  def render_pdf
+    @user = current_user
+    @favorites = get_favorites
+# binding.pry
+    render pdf: "file_name", formats: [:html], stylesheets: ["application"],
+           layout: '_pdf'
+
+
+    FavoriteMailer.new_favorite(@favorites, @user).deliver_now
   end
 
   def create
@@ -41,5 +52,14 @@ class FavoritesController < ApplicationController
     @movie = Movie.find(params[:id])
     current_user.movies.delete(@movie)
     redirect_back fallback_location: root_path
+  end
+
+  def get_favorites
+    favorites = []
+    current_user.movies.map do |favorite_movie|
+      movie = Tmdb::Movie.detail(favorite_movie.tmdb_id)
+      favorites << movie
+    end
+    @favorites_hash = ApiMoviesSerializer.new(favorites).to_hash #.find_by(movie_id: @movie['id'])
   end
 end

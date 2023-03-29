@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # get 'favorites/index'
   resources :favorites, only: [:index, :create, :destroy]
-
+  get 'favorites/render_pdf', to: 'favorites#render_pdf', as: 'render_pdf'
   # get 'user/index'
   # get 'user/show'
   get 'user/search', to: 'users#search'
