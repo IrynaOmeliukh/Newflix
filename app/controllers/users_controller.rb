@@ -5,7 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @favorite_movies = @user.favorites
+    # binding.pry
+    @favorite_movies = get_favorite_users
   end
 
   def search
@@ -18,29 +19,14 @@ class UsersController < ApplicationController
     @search_users
   end
 
-  # def add_favorite
-  #   id = params[:id]
+  def get_favorite_users
+    favorites = []
+    @user = User.find(params[:id])
+    @user.movies.map do |favorite_movie|
+      movie = Tmdb::Movie.detail(favorite_movie.tmdb_id)
+      favorites << movie
+    end
+    @favorites_hash = ApiMoviesSerializer.new(favorites).to_hash #.find_by(movie_id: @movie['id'])
+  end
 
-  #   if Movie.find_by(id: id).present?
-  #     @movie = Movie.find_by(id: id)
-  #   else
-  #     @movie = ApiMoviesSerializer.movie_to_hash(Tmdb::Movie.detail(id))
-  #   end
-  #   @user = current_user
-
-  #   if @user.favorites.map { |t|  t['movie_id'] ==  @movie['id'] }.include?(true)
-  #     redirect_back fallback_location: root_path
-  #   else
-  #     @user.favorites.create!(movie_id: @movie['id'])
-  #     redirect_to @user
-  #   end
-  #   # binding.pry
-  # end
-
-  # def remove_favorite
-  #   @user = User.find(params[:id])
-  #   @movie = Movie.find(params[:movie_id])
-  #   @user.movies.destroy(@movie) if @user.movies.include?(@movie)
-  #   redirect_to @user
-  # end
 end
