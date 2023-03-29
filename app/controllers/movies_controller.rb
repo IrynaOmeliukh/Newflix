@@ -17,10 +17,10 @@ class MoviesController < ApplicationController
   end
 
   def search
-    if params[:search].blank?
+    if params[:query].blank?
       redirect_to movies_url and return
     else
-      @parameter = params[:search].downcase
+      @parameter = params[:query].downcase
       @search_movies = MovieSearch.search(@parameter)
 
       # @movie_data = Tmdb::Search.movie(@parameter, page: 1, language: 'en')

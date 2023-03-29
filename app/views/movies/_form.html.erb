@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+<%#
   <div class="flex">
   <div class="w-1/2 p-8">
     <img src="https://via.placeholder.com/400x400" alt="Dog watching movies" class="max-w-full h-auto">
@@ -54,6 +54,49 @@
       </div>
     </form>
   </div>
-</div>
+</div> %>
 
+<div class="my-5">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :poster_path %>
+    <%= form.text_field :poster_path, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <%# <div class="my-5">
+    <%= form.label :genres %>
+    <%# <%= form.number_field :genres, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %> %>
+  <%# </div> %> %>
+
+  <div class="my-5">
+    <%= form.label :release_date %>
+    <%= form.text_field :release_date, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :popularity %>
+    <%= form.text_field :popularity, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :vote_average %>
+    <%= form.text_field :vote_average, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :vote_count %>
+    <%= form.number_field :vote_count, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
 <% end %>
