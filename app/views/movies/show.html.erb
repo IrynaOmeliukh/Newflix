@@ -54,18 +54,25 @@
 </div>
 
 <%= link_to 'Back to movies', movies_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors duration-300 ease-in-out" %>
-<%# <%= render 'favorites/index', movie: @movie %> %>
-<% db_movie = nil %>
-<% if current_user.movies.present? %>
-  <% current_user.movies.map do |movie|  %>
-    <% if movie.title == @movie['title']%>
-      <% db_movie = movie %>
+<%# <%= render 'favorites/index', movie: @movie %>
+<% if user_signed_in? %>
+  <% db_movie = nil %>
+
+  <% if current_user.movies.present? %>
+    <% current_user.movies.map do |movie|  %>
+      <% if movie.title == @movie['title']%>
+        <% db_movie = movie %>
+      <% end %>
+    <% end %>
+
+    <% if current_user.movies.map(&:title).include?(@movie['title']) %>
+      <%= button_to 'Remove from Favorites', favorite_path(id: db_movie.id), method: :delete, class: 'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
+    <% else %>
+      <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
     <% end %>
   <% end %>
-<%# <%= binding.pry %> %>
-  <% if current_user.movies.map(&:title).include?(@movie['title']) %>
-    <%= button_to 'Remove from Favorites', favorite_path(id: db_movie.id), method: :delete %>
+
   <% else %>
-    <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post %>
-  <% end %>
+    <%# <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post %> %>
+    <%= render 'shared/popup_add_favorite'%>
 <% end %>

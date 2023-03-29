@@ -1,0 +1,17 @@
+<dialog data-modal-target="modal" class="p-6 bg-white border border-gray-300 shadow-lg rounded-md w-96 h-96">
+    <button type="button" data-action="modal#close" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <%# <h1 class="text-gray-900 text-lg font-medium mb-4"><%= laptop.model %></h1> %>
+    <hr class="border-gray-200 mb-4">
+    You must have an account
+
+    <%= link_to 'Create an account', new_user_registration_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+    <%# <form class="space-y-4"> %>
+      <%# <%= render 'devise/registration/new' %> %>
+    <%# </form> %>
+  </dialog>

@@ -5,9 +5,18 @@
 
   <div class="flex justify-between items-center pb-4">
     <h1 class="font-bold text-4xl">Popular Movies</h1>
-    <%= link_to 'favorites', favorites_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"%>
 
-    <%= link_to 'New movie', new_movie_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"%>
+    <% if user_signed_in? %>
+      <%= link_to 'Favorite movies', favorites_path, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200'%>
+    <% else %>
+      <%= render 'shared/popup_favorites'%>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= link_to 'New movie', new_movie_path, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200'%>
+    <% else %>
+      <%= render 'shared/popup_new_movie'%>
+    <% end %>
   </div>
 
   <div id="movies" class="flex flex-wrap justify-between">
