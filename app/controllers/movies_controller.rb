@@ -65,6 +65,26 @@ class MoviesController < ApplicationController
     # @movie = Movie.find_by(title: title) || serialized_movie
   end
 
+  def simmilar
+    @id = params[:id]
+
+    begin
+      @detail = ApiMoviesSerializer.movie_to_hash(Tmdb::Movie.detail(@id))
+      @simmilar_movies = ApiMoviesSerializer.new(Tmdb::Movie.similar(@id)).hash_for_simmilar
+
+    rescue Tmdb::Error => e
+      redirect_back fallback_location: root_path,
+      notice: "We can not provide simmilar movies for this movie."
+    end
+  end
+
+  def top_rated
+    @tmbd_movies = Tmdb::Movie.top_rated
+    @movies_results = @tmbd_movies.results
+    @top_rated = ApiMoviesSerializer.new(@movies_results).to_hash
+
+  end
+
   # GET /movies/new
   def new
     @movie = Movie.new

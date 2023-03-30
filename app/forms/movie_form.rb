@@ -10,11 +10,16 @@ class MovieForm
     #   return 'no genres'
     # end
     # tmbd_movie_details.genres.map(&:name).join(", ")
-
-    if movie['genres'].present? || movie['genres'].nil?
-      return tmbd_movie_details.genres.map(&:name).join(", ")
+    begin
+      if movie['genres'].present? || movie['genres'].nil?
+        if tmbd_movie_details.present?
+          return tmbd_movie_details.genres.map(&:name).join(", ")
+        end
+      end
+      'no genres'
+    rescue Tmdb::Error => e
+      'no genres'
     end
-    'no genres'
     # add checking if in the db genres are setted correctly
 
   end
@@ -42,7 +47,14 @@ class MovieForm
   private
 
   def tmbd_movie_details
-    @tmbd_movie_details ||= Tmdb::Movie.detail(movie['id'])
+
+    # @tmbd_movie_details ||= Tmdb::Movie.detail(movie['id'])
+
+    begin
+      @tmbd_movie_details ||= Tmdb::Movie.detail(movie['id'])
+    rescue Tmdb::Error => e
+      @@tmbd_movie_details = []
+    end
   end
 
   # def tmbd_cast
