@@ -1,12 +1,33 @@
-<div>
-  <h1 class="font-bold text-4xl">User#show</h1>
-  <p>Find me in app/views/user/show.html.erb</p>
-</div>
-<h1><%= @user.nickname %></h1>
-<h2>Favorite Movies:</h2>
-<ul>
-<%= binding.pry %>
-  <% @favorite_movies.each do |movie| %>
-    <li><%= movie.title %></li>
+<div class="w-full bg-gray-100 p-8">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
-</ul>
+
+  <h1><%= @user.nickname %></h1>
+
+  <%= render 'devise/follower_count', user: @user %>
+  <div><%= @user.followees.count %> following</div>
+
+  <% if @user == current_user %>
+  <%= link_to 'edit profile', edit_user_registration_path %>
+  <p>People I'm following</p>
+    <% current_user.followees.each do |u| %>
+        <%= u.email %>
+    <br />
+    <% end %>
+    <p>People following me</p>
+    <% current_user.followers.each do |u| %>
+        <%= u.email %>
+    <br />
+    <% end %>
+  <% elsif current_user %>
+    <%= render 'devise/follow_button', user: @user %>
+  <% end %>
+
+  <h2>Favorite Movies:</h2>
+  <div id="movies" class="flex flex-wrap justify-between">
+    <% @favorite_movies.each do |movie| %>
+      <%= render 'movies/movie', movie: movie %>
+    <% end %>
+  </div>
+</div>

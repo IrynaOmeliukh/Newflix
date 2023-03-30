@@ -1,0 +1,5 @@
+<% if following?(user) %>
+<%= button_to 'unfollow', unfollow_path(id: user.id), method: :delete, form: { id: dom_id(user, :button) }%>
+<% else %>
+<%= button_to 'follow', follow_path(id: user.id), method: :post, form: { id: dom_id(user, :button) } %>
+<% end %>

@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
+  include UserHelper
+
   def index
     @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
-    @favorite_movies = @user.favorites
+    # binding.pry
+    @favorite_movies = get_favorite_movies_for_certain_user
   end
 
   def search
@@ -18,29 +21,54 @@ class UsersController < ApplicationController
     @search_users
   end
 
-  # def add_favorite
-  #   id = params[:id]
+  def get_favorite_movies_for_certain_user
+    favorites = []
+    @user = User.find(params[:id])
+    @user.movies.map do |favorite_movie|
+      movie = Tmdb::Movie.detail(favorite_movie.tmdb_id)
+      favorites << movie
+    end
+    @favorites_hash = ApiMoviesSerializer.new(favorites).to_hash #.find_by(movie_id: @movie['id'])
+  end
 
-  #   if Movie.find_by(id: id).present?
-  #     @movie = Movie.find_by(id: id)
-  #   else
-  #     @movie = ApiMoviesSerializer.movie_to_hash(Tmdb::Movie.detail(id))
-  #   end
-  #   @user = current_user
+  def follow
+    @user = User.find(params[:id])
 
-  #   if @user.favorites.map { |t|  t['movie_id'] ==  @movie['id'] }.include?(true)
-  #     redirect_back fallback_location: root_path
-  #   else
-  #     @user.favorites.create!(movie_id: @movie['id'])
-  #     redirect_to @user
-  #   end
-  #   # binding.pry
-  # end
+    Relationship.create_or_find_by(follower_id: current_user.id, followee_id: @user.id)
 
-  # def remove_favorite
-  #   @user = User.find(params[:id])
-  #   @movie = Movie.find(params[:movie_id])
-  #   @user.movies.destroy(@movie) if @user.movies.include?(@movie)
-  #   redirect_to @user
-  # end
+    respond_to do |format|
+      format.turbo_stream do
+        # john doe with a user id of 2
+        # dom_id_for_follower(@user) -> user_2
+        render turbo_stream: [
+          turbo_stream.replace(dom_id(@user, :button),
+                               partial: 'devise/follow_button',
+                               locals: { user: @user }),
+          turbo_stream.update(dom_id(@user, :followers_count),
+                              partial: 'devise/follower_count',
+                              locals: { user: @user })
+        ]
+      end
+    end
+  end
+
+  def unfollow
+    @user = User.find(params[:id])
+    current_user.followed_users.where(follower_id: current_user.id, followee_id: @user.id).destroy_all
+
+    respond_to do |format|
+      format.turbo_stream do
+        # john doe with a user id of 2
+        # dom_id_for_follower(@user) -> user_2
+        render turbo_stream: [
+          turbo_stream.replace(dom_id(@user, :button),
+                               partial: 'devise/follow_button',
+                               locals: { user: @user }),
+          turbo_stream.update(dom_id(@user, :followers_count),
+                              partial: 'devise/follower_count',
+                              locals: { user: @user })
+        ]
+      end
+    end
+  end
 end

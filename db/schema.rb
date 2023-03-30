@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_24_090808) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_29_122911) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_090808) do
     t.datetime "updated_at", null: false
     t.integer "tmdb_id"
     t.string "title"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

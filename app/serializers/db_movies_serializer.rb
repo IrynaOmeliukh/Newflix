@@ -8,17 +8,16 @@ class DbMoviesSerializer
   end
 
   def to_hash
-    @movies_hash = []
+    @movies_hash ||= [].tap do |arr|
 
-     movies.as_json.map do |movie|
-      if movie['tmdb_id'].present?
-        break
-      else
+      movies.as_json.map do |movie|
+        next if movie['tmdb_id'].present?
+
         new_movie = movie.slice(*EXTRACTED_KEYS)
         new_movie['details'] = movie.except(*EXTRACTED_KEYS)
-        @movies_hash << new_movie
+
+        arr << new_movie
       end
     end
-    @movies_hash
   end
 end

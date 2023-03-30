@@ -64,15 +64,15 @@
         <% db_movie = movie %>
       <% end %>
     <% end %>
-
-    <% if current_user.movies.map(&:title).include?(@movie['title']) %>
-      <%= button_to 'Remove from Favorites', favorite_path(id: db_movie.id), method: :delete, class: 'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
-    <% else %>
-      <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
-    <% end %>
   <% end %>
 
+  <% if current_user.movies.map(&:title).include?(@movie['title']) %>
+    <%= button_to 'Remove from Favorites', favorite_path(id: db_movie.id), method: :delete, class: 'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
   <% else %>
-    <%# <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post %> %>
-    <%= render 'shared/popup_add_favorite'%>
+    <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
+  <% end %>
+
+<% else %>
+  <%# <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post %> %>
+  <%= render 'shared/popup_add_favorite'%>
 <% end %>
