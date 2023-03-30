@@ -119,7 +119,17 @@ class MoviesController < ApplicationController
 
   # DELETE /movies/1
   def destroy
-    @movie.destroy
+    id = params[:id]
+    # tmbd_movie = Tmdb::Search.movie(title).results
+
+    Movie.find_by(id: id).destroy!
+      # @movie = Movie.find_by(id: id)
+    # else
+    #   @movie = ApiMoviesSerializer.movie_to_hash(Tmdb::Movie.detail(id))
+
+    # end
+    binding.pry
+    # @movie.destroy
     redirect_to movies_url, notice: "Movie was successfully destroyed."
   end
 

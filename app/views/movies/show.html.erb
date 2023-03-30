@@ -12,12 +12,12 @@
     <% if @movie['poster_path'].present? %>
       <%= image_tag "https://image.tmdb.org/t/p/original/#{@movie['poster_path']}", class: "w-full h-auto rounded-lg shadow-lg object-cover" %>
     <% else %>
-      <%# <div class="w-full h-auto rounded-lg shadow-lg bg-gray-300"></div> %>
+      <div class="w-full h-auto rounded-lg shadow-lg bg-gray-300"></div>
     <% end %>
   </div>
   <div class="w-full">
-    <h1 class="text-3xl font-bold mb-4"><%= @movie['title'] %></h1>
-    <div class="text-sm text-gray-500 mb-4"><%= @movie['overview']%></div>
+    <h1 class="text-3xl font-bold mb-4 mt-6"><%= @movie['title'] %></h1>
+    <div class="text-lg text-gray-500 mb-4"><%= @movie['overview']%></div>
     <div class="flex flex-wrap items-center gap-4 mb-4">
       <div class="flex items-center gap-4 mb-4">
       <div class="text-lg font-medium text-yellow-500"><%= @movie['vote_average'] %></div>
@@ -29,10 +29,11 @@
       <%= movie_form.genres %>
     </div>
       <table>
-        <% movie_form.casts.each_slice(3) do |cast_group| %>
+      <%  movie_cutted_cast = movie_form.casts.first(12) %>
+        <% movie_cutted_cast.each_slice(4) do |cast_group| %>
           <tr>
             <% cast_group.each do |cast| %>
-              <td>
+              <td  class="p-2">
                 <div class="flex items-center">
                   <% if cast['profile_path'].present? %>
                     <%= image_tag  "https://image.tmdb.org/t/p/original/#{cast['profile_path']}", class: "w-10 h-10 rounded-full mr-2 object-cover" %>
@@ -49,32 +50,40 @@
           </tr>
         <% end %>
       </table>
+      <div class="my-6 flex justify-between">
+        <div>
+          <%= link_to 'Back to movies', movies_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors duration-300 ease-in-out" %>
+        </div>
+        <div>
+          <% if user_signed_in? %>
+            <% db_movie = nil %>
+
+            <% if current_user.movies.present? %>
+              <% current_user.movies.map do |movie|  %>
+                <% if movie.title == @movie['title']%>
+                  <% db_movie = movie %>
+                <% end %>
+              <% end %>
+            <% end %>
+
+            <% if current_user.movies.map(&:title).include?(@movie['title']) %>
+              <%= button_to 'Remove from Favorites', favorite_path(id: db_movie.id), method: :delete, class: 'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
+            <% else %>
+              <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
+            <% end %>
+
+          <% else %>
+            <%# <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post %> %>
+            <%= render 'shared/popup_add_favorite'%>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to 'Simmilar', movie_simmilar_path(@movie['id']), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors duration-300 ease-in-out" %>
+        </div>
+        <div class="inline-block ml-2">
+          <%= button_to 'Destroy this movie', movie_delete_path(title: @movie['title'].parameterize, id: @movie['id']), method: :delete, class: "rounded-lg py-3 px-5 bg-pink-500 text-white font-medium hover:bg-pink-600" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-<%= link_to 'Back to movies', movies_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors duration-300 ease-in-out" %>
-<%# <%= render 'favorites/index', movie: @movie %>
-<% if user_signed_in? %>
-  <% db_movie = nil %>
-
-  <% if current_user.movies.present? %>
-    <% current_user.movies.map do |movie|  %>
-      <% if movie.title == @movie['title']%>
-        <% db_movie = movie %>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <% if current_user.movies.map(&:title).include?(@movie['title']) %>
-    <%= button_to 'Remove from Favorites', favorite_path(id: db_movie.id), method: :delete, class: 'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
-  <% else %>
-    <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200' %>
-  <% end %>
-
-<% else %>
-  <%# <%= button_to 'Add to Favorites', favorites_path(id: @movie['id']), method: :post %> %>
-  <%= render 'shared/popup_add_favorite'%>
-<% end %>
-
-<%= link_to 'Simmilar', movie_simmilar_path(@movie['id']), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors duration-300 ease-in-out" %>

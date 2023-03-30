@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :movies, except: [:show]
+  resources :movies, except: [:show, :destroy]
   get '/movies/:title/:id', to: 'movies#show', as: 'movie_title'
+  delete '/movies/:title/:id', to: 'movies#destroy', as: 'movie_delete'
   get '/search', to: 'movies#search'
   get '/top_rated', to: 'movies#top_rated'
   get '/simmilar/:id', to: 'movies#simmilar', as: 'movie_simmilar'
