@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   post 'user/follow', to: 'users#follow', as: 'follow'
   delete 'user/unfollow', to: 'users#unfollow', as: 'unfollow'
+  get '/user/followees/:id', to: 'users#followees', as: 'user_followees'
+  get '/user/followers/:id', to: 'users#followers', as: 'user_followers'
+
 
   get '/movies/:title/:id', to: 'movies#show', as: 'movie_title'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

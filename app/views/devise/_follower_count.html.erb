@@ -1,1 +1,1 @@
-<%= tag.p(pluralize(user.followers.count, "follower"), id: dom_id(user, :followers_count)) %>
+<%= tag.p(user.followers.count, id: dom_id(user, :followers_count), class: 'font-bold text-gray-700 text-xl') %>

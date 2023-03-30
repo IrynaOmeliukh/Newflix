@@ -3,28 +3,51 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <h1><%= @user.nickname %></h1>
+  <div class="p-16">
+    <div class="p-8 bg-white shadow mt-24">
+      <div class="grid grid-cols-1 md:grid-cols-3">
+        <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
+          <div>
+            <p class="font-bold text-gray-700 text-xl"><%= @favorite_movies.count %></p>
+            <p class="text-gray-400">Favorite Movies</p>
+          </div>
+          <div>
+            <%= render 'devise/follower_count', user: @user %>
+            <%# <p class="text-gray-400">Followers</p> %>
+            <%= link_to 'Followers', user_followers_path(@user.id), class: "text-gray-400"  %>
 
-  <%= render 'devise/follower_count', user: @user %>
-  <div><%= @user.followees.count %> following</div>
+            <%# <%= link_to 'Followers'  %>
+            <%# <%= render 'devise/table', users: current_user.followers %>
+          </div>
+          <div>
+            <p class="font-bold text-gray-700 text-xl"><%= @user.followees.count %></p>
+            <%# <p class="text-gray-400">Following</p> %>
+            <%= link_to 'Following', user_followees_path(@user.id), class: "text-gray-400"  %>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
+          <% if @user == current_user %>
+            <%= link_to 'Edit profile', edit_user_registration_path, class: "text-white py-2 pt-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5" %>
+          <% elsif current_user %>
+            <%= render 'devise/follow_button', user: @user %>
+          <% end %>
+        </div>
+      </div>
+      <div class="mt-20 text-center border-b pb-12">
+        <h1 class="text-4xl font-medium text-gray-700"><%= @user.nickname %></h1>
+        <p class="font-light text-gray-600 mt-3"><%= @user.email %></p>
+      </div>
+    </div>
+  </div>
 
-  <% if @user == current_user %>
-  <%= link_to 'edit profile', edit_user_registration_path %>
-  <p>People I'm following</p>
-    <% current_user.followees.each do |u| %>
-        <%= u.email %>
-    <br />
-    <% end %>
-    <p>People following me</p>
-    <% current_user.followers.each do |u| %>
-        <%= u.email %>
-    <br />
-    <% end %>
-  <% elsif current_user %>
-    <%= render 'devise/follow_button', user: @user %>
-  <% end %>
-
-  <h2>Favorite Movies:</h2>
+  <%# <h1>Favorite Movies:</h1> %>
   <div id="movies" class="flex flex-wrap justify-between">
     <% @favorite_movies.each do |movie| %>
       <%= render 'movies/movie', movie: movie %>

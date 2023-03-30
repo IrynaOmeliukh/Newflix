@@ -21,16 +21,6 @@ class UsersController < ApplicationController
     @search_users
   end
 
-  def get_favorite_movies_for_certain_user
-    favorites = []
-    @user = User.find(params[:id])
-    @user.movies.map do |favorite_movie|
-      movie = Tmdb::Movie.detail(favorite_movie.tmdb_id)
-      favorites << movie
-    end
-    @favorites_hash = ApiMoviesSerializer.new(favorites).to_hash #.find_by(movie_id: @movie['id'])
-  end
-
   def follow
     @user = User.find(params[:id])
 
@@ -70,5 +60,34 @@ class UsersController < ApplicationController
         ]
       end
     end
+  end
+
+  def followees
+    @user = User.find(params[:id])
+
+    @followees = @user.followees
+  end
+
+  def followers
+    @user = User.find(params[:id])
+
+    @followers = @user.followers
+  end
+
+  private
+
+  def get_favorite_movies_for_certain_user
+    favorites = []
+    @user = User.find(params[:id])
+    @user.movies.map do |favorite_movie|
+      movie = Tmdb::Movie.detail(favorite_movie.tmdb_id)
+      favorites << movie
+    end
+    @favorites_hash = ApiMoviesSerializer.new(favorites).to_hash #.find_by(movie_id: @movie['id'])
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+
   end
 end
