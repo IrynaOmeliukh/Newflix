@@ -11,16 +11,10 @@
     <% else %>
       <%= render 'shared/popup_favorites'%>
     <% end %>
-
-    <% if user_signed_in? %>
-      <%= link_to 'New movie', new_movie_path, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200'%>
-    <% else %>
-      <%= render 'shared/popup_new_movie'%>
-    <% end %>
   </div>
 
   <div id="movies" class="flex flex-wrap justify-between">
-    <% @movie_decorator.collection.each do |movie| %>
+    <% @movies.each do |movie| %>
       <%= render 'movies/movie', movie: movie %>
     <% end %>
   </div>

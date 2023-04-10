@@ -3,7 +3,8 @@ class MoviesController < ApplicationController
   def index
     @tmbd_movies = Tmdb::Movie.popular
     @movies_results = @tmbd_movies.results
-    @movie_decorator = MoviesDecorator.new(@movies_results, collection)
+    @movies = ApiMoviesSerializer.new(@movies_results).to_hash
+    # @movie_decorator = MoviesDecorator.new(@movies_results, collection)
     # @movies_results.each do |tmdb|
     #   if !Movie.exists?(name: tmdb.title)
     #     movie = Movie.create(name: tmdb.title, genres: tmdb.genre_ids, tmdb_id: tmdb.id,
