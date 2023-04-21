@@ -39,5 +39,10 @@
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
 
+  <% if locale == :uk %>
+    <%= link_to "English", url_for(locale: 'en') %>
+  <% else %>
+    <%= link_to "Українська", url_for(locale: 'uk') %>
+  <% end %>
   </div>
 </nav>

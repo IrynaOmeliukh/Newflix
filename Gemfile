@@ -75,3 +75,4 @@ gem 'chewy'
 gem 'wicked_pdf'
 
 gem "wkhtmltopdf-binary"
+gem 'rails-i18n'

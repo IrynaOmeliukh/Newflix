@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
   # GET /movies
   def index
+# binding.pry
     @tmbd_movies = Tmdb::Movie.popular
     @movies_results = @tmbd_movies.results
     @movies = ApiMoviesSerializer.new(@movies_results).to_hash
@@ -23,7 +24,7 @@ class MoviesController < ApplicationController
     else
       @parameter = params[:query].downcase
       @search_movies = MovieSearch.search(@parameter)
-
+      # binding.pry
       # @movie_data = Tmdb::Search.movie(@parameter, page: 1, language: 'en')
       # movie_array = @movie_data.results
 
