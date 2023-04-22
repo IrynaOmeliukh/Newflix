@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  scope '(:locale)' do
+  scope "/(:locale)", locale: /uk|en/ do
     resources :favorites, only: [:index, :create, :destroy]
     get 'favorites/render_pdf', to: 'favorites#render_pdf', as: 'render_pdf'
 

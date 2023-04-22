@@ -33,4 +33,94 @@ en:
   movies:
     index:
       home: 'homeee'
-  # hello: "Hello world"
+      title: 'Movies'
+      favorite: 'Favorite movies'
+    search:
+      title: 'Search'
+    show:
+      remove_fav: 'Remove from Favorites'
+      add_fav: 'Add to Favorites'
+      back: 'Back to movies'
+      simmilar: 'Simmilar'
+    simmilar:
+      title: 'Simmilar for the movie:'
+    top_rated:
+      title: 'Top rated'
+    movie:
+      details: 'Details'
+  shared:
+    navbar:
+      top_rated: 'Top rated'
+      users: 'Users'
+      sign_out: "Sign out"
+      sign_in: "Sign in"
+      search_users: 'Search Users...'
+      search_movies: 'Search Movies...'
+    popup_add_favorite:
+      title: 'Add to favorites'
+    popup_dialog_window:
+      account: 'You must have an account'
+      create: 'Create an account'
+    popup_favorites:
+      title: 'Favorite movies'
+  users:
+    index:
+      list: 'List of Users'
+    search:
+      list: 'List of Users'
+    show:
+      fav_movies: 'Favorite Movies'
+      followers: 'Followers'
+      following: 'Following'
+      edit: 'Edit profile'
+  devise:
+    follow_button:
+      follow: 'follow'
+      unfollow: 'unfollow'
+    table:
+      name: 'Name'
+      email: 'Email'
+      actions: 'Actions'
+    user:
+      view: 'View User'
+    confirmations:
+      new:
+        resend: 'Resend confirmation instructions'
+    mailer:
+      confirmation_instructions:
+        title: 'Welcome'
+        confirmation: 'You can confirm your account email through the link below:'
+        confirm: 'Confirm my account'
+    passwords:
+      edit:
+        title: 'Change your password'
+        new: 'New password'
+        confirm: 'Confirm new password'
+        change: 'Change my password'
+      new:
+        title: 'Forgot your password?'
+        instructions: 'Send me reset password instructions'
+    registrations:
+      edit:
+        title: 'Edit'
+        waiting_confirmation: 'Currently waiting confirmation for:'
+        mimimum: 'characters minimum'
+        update: 'Update'
+        delete_acc: 'Cancel my account'
+        delete_button: 'Delete my account?'
+        back: 'Back'
+      new:
+        title: 'Sign up'
+        mimimum: 'characters minimum'
+        sign_up: 'Sign up'
+    sessions:
+      new:
+        title: 'Log in'
+        submit: 'Log in'
+    # shared:
+    #   links:
+    #     doesnt_have_acc: 'Doesn't have an account? Log in'
+    #     sign_up: 'Sign up'
+    #     forgot_pass: 'Forgot your password?'
+    #     didnt_receive_confirmation_instr: 'Didn't receive confirmation instructions?'
+    #     didnt_receive_unlock_instr: 'Didn't receive unlock instructions?'

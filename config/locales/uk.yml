@@ -2,3 +2,94 @@ uk:
   movies:
     index:
       home: 'dim'
+      title: 'Фільми'
+      favorite: 'Улюблені фільми'
+    search:
+      title: 'Пошук'
+    show:
+      add_fav: 'Додати в улюблені'
+      remove_fav: 'Видалити з улюблених'
+      back: 'Назад до фільмів'
+      simmilar: 'Подібні'
+    simmilar:
+      title: 'Подібні до фільму:'
+    top_rated:
+      title: 'Топ фільмів'
+    movie:
+      details: 'Детальніше'
+  shared:
+    navbar:
+      top_rated: 'Топ фільмів'
+      users: 'Користувачі'
+      sign_out: "Вийти"
+      sign_in: "Зареєструватися"
+      search_users: 'Пошук користувачів...'
+      search_movies: 'Пошук фільмів...'
+    popup_add_favorite:
+      title: 'Додати в улюблені'
+    popup_dialog_window:
+      account: 'Ви повинні мати акаунт'
+      create: 'Створити акаунт'
+    popup_favorites:
+      title: 'Улюблені фільми'
+  users:
+    index:
+      list: 'Список користувачів'
+    search:
+      list: 'Список користувачів'
+    show:
+      fav_movies: 'Улюблені фільми'
+      followers: 'Слідкувачі'
+      following: 'Відслідковуються'
+      edit: 'Редагувати профіль'
+  devise:
+    follow_button:
+      follow: 'Підписатися'
+      unfollow: 'Відписатися'
+    table:
+      name: "Ім'я"
+      email: 'Email'
+      actions: 'Дії'
+    user:
+      view: 'Переглянути'
+    confirmations:
+      new:
+        resend: 'Надіслати лист для підтвердження ще раз'
+    mailer:
+      confirmation_instructions:
+        title: 'Добридень'
+        confirmation: 'Ви можете підтвердити електронну адресу свого облікового запису за посиланням нижче:'
+        confirm: 'Підтвердити мій обліковий запис'
+    passwords:
+      edit:
+        title: 'Змінити пароль'
+        new: 'Новий пароль'
+        confirm: 'Повторіть новий пароль'
+        change: 'Змінити пароль'
+      new:
+        title: 'Забули свій пароль?'
+        instructions: 'Надішліть мені інструкції щодо зміни пароля'
+    registrations:
+      edit:
+        title: 'Редагувати'
+        waiting_confirmation: 'Наразі очікується підтвердження:'
+        mimimum: 'символів мінімум'
+        update: 'Оновити'
+        delete_acc: 'Видалити'
+        delete_button: 'Видалити мій обліковий запис?'
+        back: 'Назад'
+      new:
+        title: 'Зареєструватися'
+        mimimum: 'символів мінімум'
+        sign_up: 'Зареєструватися'
+    sessions:
+      new:
+        title: 'Увійти'
+        submit: 'Увійти'
+    shared:
+      links:
+        doesnt_have_acc: 'Немає облікового запису? Зареєструватися'
+        sign_up: 'Зареєструватися'
+        forgot_pass: 'Забули свій пароль?'
+        didnt_receive_confirmation_instr: 'Не отримали інструкцій щодо підтвердження?'
+        didnt_receive_unlock_instr: 'Не отримали інструкції з розблокування?'

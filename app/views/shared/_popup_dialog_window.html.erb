@@ -7,9 +7,9 @@
 
     <%# <h1 class="text-gray-900 text-lg font-medium mb-4"><%= laptop.model %></h1> %>
     <hr class="border-gray-200 mb-4">
-    You must have an account
+    <%= t('.account') %>
 
-    <%= link_to 'Create an account', new_user_registration_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to t('.create'), new_user_registration_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 
     <%# <form class="space-y-4"> %>
       <%# <%= render 'devise/registration/new' %> %>

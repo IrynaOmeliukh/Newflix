@@ -1,5 +1,5 @@
 <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6">
-  <h2 class="text-2xl font-bold mb-6">Edit <%= resource_name.to_s.humanize %></h2>
+  <h2 class="text-2xl font-bold mb-6"><%= t('.title') %> <%= resource_name.to_s.humanize %></h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -10,7 +10,7 @@
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <div><%= t('.waiting_confirmation') %> <%= resource.unconfirmed_email %></div>
     <% end %>
 
     <div class="mb-4">
@@ -18,7 +18,7 @@
       <%= f.password_field :password, autocomplete: "new-password", class: "w-full px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" %>
       <% if @minimum_password_length %>
         <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
+        <em><%= @minimum_password_length %> <%= t('.mimimum') %></em>
       <% end %>
     </div>
 
@@ -33,17 +33,17 @@
     </div>
 
     <div class="flex justify-center">
-      <%= f.submit "Update", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" %>
+      <%= f.submit t('.update'), class: "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" %>
     </div>
   <% end %>
 
   <div class="flex justify-center mt-6">
-    <h3 class="text-lg font-bold mb-6">Cancel my account</h3>
+    <h3 class="text-lg font-bold mb-6"><%= t('.delete_acc') %></h3>
   </div>
 
   <div class="flex justify-between">
-    <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
-    <%= link_to "Back", :back %>
+    <%= button_to t('.delete_button'), registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+    <%= link_to t('.back'), :back %>
   </div>
 
 </div>

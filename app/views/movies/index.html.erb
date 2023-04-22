@@ -4,10 +4,10 @@
   <% end %>
 
   <div class="flex justify-between items-center pb-4">
-    <h1 class="font-bold text-4xl">Movies</h1>
+    <h1 class="font-bold text-4xl"><%= t('.title') %></h1>
 
     <% if user_signed_in? %>
-      <%= link_to 'Favorite movies', favorites_path, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200'%>
+      <%= link_to t('.favorite'), favorites_path, class:'rounded-lg py-3 px-5 bg-white inline-block font-medium text-gray-600 hover:bg-gray-200'%>
     <% else %>
       <%= render 'shared/popup_favorites'%>
     <% end %>

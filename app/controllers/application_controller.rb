@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
   protected
 
     def set_tmbd_language
-      Tmdb::Api.language(I18n.locale.to_s)
+      if params[:locale]
+        Tmdb::Api.language(params[:locale])
+      end
     end
 
     def set_i18n_locale_from_params

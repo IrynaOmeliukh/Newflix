@@ -18,14 +18,14 @@
           <div class="bg-yellow-400 font-bold rounded-xl p-2"><%= movie_form.rating %></div>
         </div>
         <div>
-          <div class="text-sm text-gray-400">Movie</div>
+          <%# <div class="text-sm text-gray-400">Movie</div> %>
           <div class="text-lg text-gray-800"><%= movie['release_date'] %></div>
         </div>
           <p class=" text-gray-400 max-h-40 overflow-y-hidden">
             <%= movie_form.genres %>
           </p>
         <%# <div class="flex text-2xl font-bold text-a"></div> %>
-        <%= link_to 'Details', movie_title_path(title: movie['title'].parameterize, id: movie['id']), class: 'flex text-2xl font-bold text-a' %>
+        <%= link_to t('.details'), movie_title_path(title: movie['title'].parameterize, id: movie['id']), class: 'flex text-2xl font-bold text-a' %>
 
       </div>
 

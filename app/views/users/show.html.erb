@@ -9,12 +9,12 @@
         <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
           <div>
             <p class="font-bold text-gray-700 text-xl"><%= @favorite_movies.count %></p>
-            <p class="text-gray-400">Favorite Movies</p>
+            <p class="text-gray-400"><%= t('.fav_movies') %></p>
           </div>
           <div>
             <%= render 'devise/follower_count', user: @user %>
             <%# <p class="text-gray-400">Followers</p> %>
-            <%= link_to 'Followers', user_followers_path(@user.id), class: "text-gray-400"  %>
+            <%= link_to t('.followers'), user_followers_path(id: @user.id), class: "text-gray-400"  %>
 
             <%# <%= link_to 'Followers'  %>
             <%# <%= render 'devise/table', users: current_user.followers %>
@@ -22,7 +22,7 @@
           <div>
             <p class="font-bold text-gray-700 text-xl"><%= @user.followees.count %></p>
             <%# <p class="text-gray-400">Following</p> %>
-            <%= link_to 'Following', user_followees_path(@user.id), class: "text-gray-400"  %>
+            <%= link_to t('.following'), user_followees_path(id: @user.id), class: "text-gray-400"  %>
           </div>
         </div>
         <div class="relative">
@@ -34,7 +34,7 @@
         </div>
         <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
           <% if @user == current_user %>
-            <%= link_to 'Edit profile', edit_user_registration_path, class: "text-white py-2 pt-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5" %>
+            <%= link_to t('.edit'), edit_user_registration_path, class: "text-white py-2 pt-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5" %>
           <% elsif current_user %>
             <%= render 'devise/follow_button', user: @user %>
           <% end %>
