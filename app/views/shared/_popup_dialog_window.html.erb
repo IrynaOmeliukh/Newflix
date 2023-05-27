@@ -1,17 +1,15 @@
-<dialog data-modal-target="modal" class="p-6 bg-white border border-gray-300 shadow-lg rounded-md w-96 h-96">
-    <button type="button" data-action="modal#close" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">
-      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
+<dialog data-modal-target="modal" class="p-6 bg-gray-100 border border-gray-300 shadow-lg rounded-md w-96 h-26">
+  <h1 class="text-gray-900 text-2xl font-bold mb-4"><%= t('.account') %></h1>
+  <hr class="border-gray-200 mb-4">
+  <%# <%= t('.account') %>
 
-    <%# <h1 class="text-gray-900 text-lg font-medium mb-4"><%= laptop.model %></h1> %>
-    <hr class="border-gray-200 mb-4">
-    <%= t('.account') %>
+  <div class="flex justify-center items-end mt-auto">
+    <%= link_to t('.create'), new_user_registration_path, class: "py-3 px-5 bg-blue-500 text-white font-medium rounded-lg" %>
+  </div>
 
-    <%= link_to t('.create'), new_user_registration_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-
-    <%# <form class="space-y-4"> %>
-      <%# <%= render 'devise/registration/new' %> %>
-    <%# </form> %>
-  </dialog>
+  <button type="button" data-action="modal#close" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">
+    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+</dialog>

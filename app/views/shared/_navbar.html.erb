@@ -25,26 +25,26 @@
         <%# <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a> %>
       </li>
     </ul>
-    <div class="flex md:order-2">
+    <div class="flex md:order-2 ">
       <!-- User search form -->
       <%= form_tag user_search_path, method: :get do %>
-        <%= text_field_tag :search, params[:search], placeholder: t('.search_users') %>
-        <%= submit_tag 'Search' %>
+        <%= text_field_tag :search, params[:search], placeholder: t('.search_users'), class: 'rounded' %>
+        <%= submit_tag 'Search', class: 'py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'%>
       <% end %>
 
       <!-- Movie search form -->
       <%= form_tag search_path, method: :get do %>
-        <%= text_field_tag :query, params[:query], placeholder: t('.search_movies') %>
-        <%= submit_tag 'Search' %>
+        <%= text_field_tag :query, params[:query], placeholder: t('.search_movies') , class: 'rounded'%>
+        <%= submit_tag 'Search', class: 'py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' %>
       <% end %>
     </div>
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
 
   <% if locale == :uk %>
-    <%= link_to "English", url_for(locale: 'en') %>
+    <%= link_to "English", url_for(locale: 'en'), class: 'py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' %>
   <% else %>
-    <%= link_to "Українська", url_for(locale: 'uk') %>
+    <%= link_to "Українська", url_for(locale: 'uk'), class: 'py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' %>
   <% end %>
   </div>
 </nav>
